@@ -14,7 +14,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ZnModuleSample"
+rootProject.name = "wvmkiller"
 include(
     ":module"
 )

@@ -1,1 +1,2 @@
-name=adbd lib/lib${moduleId}.so
+name=android.hardware.drm-service.widevine lib/lib${moduleId}.so
+name=android.hardware.drm@1.3-service.widevine lib/lib${moduleId}.so

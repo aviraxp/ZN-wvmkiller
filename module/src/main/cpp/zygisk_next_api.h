@@ -10,9 +10,9 @@ extern "C" {
 #define ZN_FAILED 1
 
 struct ZygiskNextAPI {
-    char magic[16];
     int (*pltHook)(void* base_addr, const char* symbol, void* hook_handler, void** original);
     int (*inlineHook)(void* target, void* addr, void** original);
+    int (*inlineUnhook)(void* target);
 };
 
 struct ZygiskNextModule {

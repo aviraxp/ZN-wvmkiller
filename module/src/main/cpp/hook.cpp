@@ -10,6 +10,7 @@ static char* (*old_getenv)(const char *name) = nullptr;
 static const char* my_getenv(const char *name) {
     // https://github.com/LineageOS/android_hardware_oplus/commit/4c37ab7678f3efea2d9ab5f54c57871eb5c19e00
     if (strcmp(name, "FORCE_LEVEL3_OEMCRYPTO") == 0) {
+        LOGI("set FORCE_LEVEL3_OEMCRYPTO env success");
         return "yes";
     }
     return old_getenv(name);
@@ -18,11 +19,8 @@ static const char* my_getenv(const char *name) {
 // this function will be called after all of the main executable's needed libraries are loaded
 // and before the entry of the main executable called
 void onModuleLoaded(void* self_handle, const struct ZygiskNextAPI* api) {
-    LOGI("module loaded");
-
     // inline hook drm service's getenv function
     auto fun = dlsym(RTLD_NEXT, "getenv");
-    LOGI("open addr %p", fun);
     if (api->inlineHook(fun, (void *) my_getenv, (void**) &old_getenv) == ZN_SUCCESS) {
         LOGI("inline hook success %p", old_getenv);
     } else {
